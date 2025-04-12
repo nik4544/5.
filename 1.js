@@ -42,20 +42,52 @@ function sumArray3() {
 }
 sumArray3();
 
-function matricha() {
-    let sum = 0;
-    let matrix = [
-        [1,2,3],// 0
-        [4,5,6],// 1
-        [7,8,9] // 2
-    ];// 0 1 2
-    let elements = [];
-    for (let i = 0; i < matrix.length; i++) {
-        let elem = matrix[i][matrix.length - 1 - i];
-        elements.push(elem);
-        sum += elem;
-    }
-    console.log(elements);
-    console.log(sum);
+function oper_matr(matr) {
+	let width = matr[0].length;
+	let height = matr.length;
+
+	let sum_lst = [];
+	let sum;
+	let x, y;
+
+	// Начинаем с элементов первой строки.
+	for (let i = 0; i < width; ++i) {
+		sum = 0;
+		x = i;
+		y = 0;
+		while (x < width && y < height) {
+			sum += matr[y][x];
+			++x;
+			++y;
+		}
+		sum_lst.push(sum);
+	}
+
+	// Теперь начинаем с элементов первого столбца (исключая первый из них).
+	for (let i = 1; i < height; ++i) {
+		sum = 0;
+		x = 0;
+		y = i;
+		while (x < width && y < height) {
+			sum += matr[y][x];
+			++x;
+			++y;
+		}
+		sum_lst.push(sum);
+	}
+
+	return sum_lst;
 }
-matricha();
+
+let matr = [
+	[1,  2,  3,  4,  5],
+	[6,  7,  8,  9,  10],
+	[11, 12, 13, 14, 15]
+];
+
+let res = oper_matr(matr);
+console.log(Math.min(...res));
+
+oper_matr(matr);
+
+
